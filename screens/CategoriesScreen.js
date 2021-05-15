@@ -1,7 +1,6 @@
 import React from 'react'
-import { Button, FlatList, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {FlatList, StyleSheet, } from 'react-native';
 import CategoryGridTitle from '../components/CategoryGridTitle';
-import Colors from '../constants/Colors';
 import { CATEGORIES } from '../data/dummy-data';
 
 
@@ -12,7 +11,7 @@ const CategoriesScreen=props=>{
             title={itemData.item.title}
             color={itemData.item.color}
             onSelect={()=>{props.navigation.navigate({routeName:'CategoryMeals', 
-            params:{categoryId:itemData.item.id,
+                params:{categoryId:itemData.item.id,
             }});
             }}/>
     };    
