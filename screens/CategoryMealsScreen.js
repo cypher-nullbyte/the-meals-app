@@ -17,13 +17,8 @@ const CategoryMealsScreen=props=>{
 CategoryMealsScreen.navigationOptions=(navigationData)=>{
     const catId=navigationData.navigation.getParam('categoryId');
     const selectedCategory=CATEGORIES.find(cat=>cat.id===catId);
-
     return {
         headerTitle:selectedCategory.title,
-        headerStyle:{
-            backgroundColor: Platform.OS==='android'? Colors.primaryColor :'white',
-        },
-        headerTintColor:Platform.OS==='android'?'white':Colors.primaryColor,
     }
 };
     
