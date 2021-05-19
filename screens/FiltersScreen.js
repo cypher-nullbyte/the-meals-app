@@ -1,18 +1,21 @@
 import React, {useState} from 'react'
+import { useEffect,useCallback } from 'react';
 import { Platform, StyleSheet, Switch, Text, View } from 'react-native';
 import { HeaderButtons,Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/HeaderButton';
 import Colors from '../constants/Colors';
 
-const FilterSwitch=props=>(
-<View style={styles.filterContainer}>
-    <Text>{props.label}</Text>
-    <Switch value={props.state} onValueChange={props.onChange} 
-        trackColor={{true:Colors.primaryColor,false:Colors.accentColor}}    
-        thumbColor={Platform.OS==='android'? Colors.primaryColor :'white'}
-    />
-</View>
-);
+const FilterSwitch=props=>{
+
+    return (
+    <View style={styles.filterContainer}>
+        <Text>{props.label}</Text>
+        <Switch value={Boolean(props.state)} onValueChange={props.onChange} 
+            trackColor={{true:Colors.primaryColor,false:Colors.accentColor}}    
+            thumbColor={Platform.OS==='android'? Colors.primaryColor :'white'}
+        />
+    </View>)
+};
 
 
 const FiltersScreen=props=>{
@@ -20,6 +23,22 @@ const FiltersScreen=props=>{
     const [isLactoseFree,setIsLactoseFree]=useState(false);
     const [isVegan,setIsVegan]=useState(false);
     const [isVegetarian,setIsVegetarian]=useState(false);
+
+    const saveFilters=useCallback(()=>{
+        const appliedFilters={
+            gluteenFree:isGluetenFree,
+            lactoseFree:isLactoseFree,
+            vegan:isVegan,
+            vegetarian:isVegetarian,
+        };
+        return appliedFilters;
+    },[isGluetenFree,isLactoseFree,isVegetarian,isVegan]);
+
+    useEffect(()=>{
+        console.log(saveFilters());
+        props.navigation.setParams({save:saveFilters});
+    },[saveFilters]);
+
     return (
         <View style={styles.screen}>
             <Text style={styles.title}>Available Filters!</Text>
@@ -48,6 +67,13 @@ FiltersScreen.navigationOptions=navData=>{
                 <Item title="Menu" iconName='ios-menu' onPress={()=>{
                     navData.navigation.toggleDrawer();
                 }}/>
+            </HeaderButtons>
+            );
+    },
+    headerRight:()=>{
+        return (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Save" iconName='ios-save' onPress={()=>{navData.navigation.getParam('save')()}}/>
             </HeaderButtons>
             );
     }}
