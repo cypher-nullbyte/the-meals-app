@@ -1,6 +1,8 @@
 import React from 'react'
 import {FlatList, StyleSheet, } from 'react-native';
+import { HeaderButtons,Item } from 'react-navigation-header-buttons';
 import CategoryGridTitle from '../components/CategoryGridTitle';
+import CustomHeaderButton from '../components/HeaderButton';
 import { CATEGORIES } from '../data/dummy-data';
 
 
@@ -23,8 +25,18 @@ const CategoriesScreen=props=>{
     );
 };
 
-CategoriesScreen.navigationOptions={
+CategoriesScreen.navigationOptions=navData=>{
+    return{
     headerTitle:"Meal Categories",
+    headerLeft:()=>{
+        return (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item title="Menu" iconName='ios-menu' onPress={()=>{
+                    navData.navigation.toggleDrawer();
+                }}/>
+            </HeaderButtons>
+            );
+    }}
 };
 
 const styles = StyleSheet.create({
