@@ -12,6 +12,7 @@ const MealList=props=>{
             onSelectMeal={()=>{
                 props.navigation.navigate({routeName:'MealDetail',params:{
                     mealId:itemData.item.id,
+                    mealTitle:itemData.item.title,
                 }})
             }}/>);
     };
