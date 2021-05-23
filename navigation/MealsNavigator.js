@@ -93,6 +93,7 @@ const MealsFavTabNavigator=Platform.OS==='android'
     {
         activeColor:'white',
         shifting:true,
+        initialRouteName:'Meals',
     }
 )
 : createBottomTabNavigator(
@@ -103,7 +104,8 @@ const MealsFavTabNavigator=Platform.OS==='android'
                 fontFamily:'open-sans-bold'
             },
             activeTintColor:Colors.primaryColor,
-        }
+        },
+        initialRouteName:'Meals',
     }
 );
 
@@ -134,6 +136,7 @@ const MainNavigator=createDrawerNavigator({
             marginTop:30
         },
     },
+    initialRouteName:'MealsFavs',
 });
 
 export default createAppContainer(MainNavigator);

@@ -6,7 +6,8 @@ const initialState={
     favoriteMeals:[],
 };
 
-const mealsReducer=(state=initialState,action)=>{
+const mealsReducer=(state=initialState,action)=>{123
+    
     switch(action.type)
     {
         case TOGGLE_FAVORITE:
@@ -22,7 +23,7 @@ const mealsReducer=(state=initialState,action)=>{
                 return {...state,favoriteMeals:state.favoriteMeals.concat(meal)};
             }
         case SET_FILTERS:
-            const appliedFilters=actions.filters;
+            const appliedFilters=action.filters;
             const updatedFilteredMeals=state.meals.filter(meal=>{
                 if(appliedFilters.glutenFree && !meal.isGlutenFree) return false;
                 if(appliedFilters.lactoseFree && !meal.lactoseFree) return false;
